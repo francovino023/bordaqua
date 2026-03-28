@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BordAqua – Maceta antihormigas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-50: #EAF3DE;
+    --green-100: #C0DD97;
+    --green-200: #97C459;
+    --green-400: #639922;
+    --green-600: #3B6D11;
+    --green-800: #27500A;
+    --teal-50: #E1F5EE;
+    --teal-200: #5DCAA5;
+    --teal-400: #1D9E75;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --amber-50: #FAEEDA;
+    --amber-200: #EF9F27;
+    --amber-400: #BA7517;
+    --gray-50: #F1EFE8;
+    --gray-100: #D3D1C7;
+    --gray-200: #B4B2A9;
+    --gray-400: #888780;
+    --gray-600: #5F5E5A;
+    --gray-800: #444441;
+    --gray-900: #2C2C2A;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f7f4ef;
+    color: var(--gray-900);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: transparent;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--green-800);
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--teal-400); }
+  .nav-badge {
+    background: var(--green-50);
+    border: 1px solid var(--green-100);
+    color: var(--green-600);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, #d4edda 0%, #f7f4ef 70%);
+    z-index: 0;
+  }
+  .hero-leaves {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 55%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 520px;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--amber-50);
+    border: 1px solid var(--amber-200);
+    color: var(--amber-400);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.03em;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--amber-200);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--teal-600);
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  /* FORM */
+  .form-wrapper {
+    background: white;
+    border: 1px solid var(--gray-100);
+    border-radius: 16px;
+    padding: 1.5rem;
+    max-width: 420px;
+  }
+  .form-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .form-row {
+    display: flex;
+    gap: 8px;
+  }
+  .form-input {
+    flex: 1;
+    border: 1.5px solid var(--gray-100);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--gray-900);
+    background: var(--gray-50);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: var(--teal-400); background: white; }
+  .form-input::placeholder { color: var(--gray-200); }
+  .btn-submit {
+    background: var(--green-600);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover { background: var(--green-800); transform: translateY(-1px); }
+  .btn-submit:active { transform: scale(0.97); }
+  .form-note {
+    font-size: 0.78rem;
+    color: var(--gray-400);
+    margin-top: 0.75rem;
+  }
+  .counter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-50);
+  }
+  .avatars {
+    display: flex;
+  }
+  .avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-right: -8px;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  .av1 { background: var(--teal-400); }
+  .av2 { background: var(--green-400); }
+  .av3 { background: var(--amber-400); }
+  .counter-text { font-size: 0.82rem; color: var(--gray-600); margin-left: 14px; }
+  .counter-text strong { color: var(--gray-900); font-weight: 500; }
+
+  /* ILUSTRACIÓN MACETA */
+  .pot-illustration {
+    width: 320px;
+    height: 320px;
+    position: relative;
+  }
+
+  /* FEATURES */
+  .features {
+    padding: 5rem 3rem;
+    background: white;
+  }
+  .features-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .features-sub {
+    text-align: center;
+    color: var(--gray-400);
+    font-size: 0.95rem;
+    margin-bottom: 3rem;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .feature-card {
+    background: var(--gray-50);
+    border-radius: 14px;
+    padding: 1.5rem;
+    border: 1px solid var(--gray-100);
+  }
+  .feature-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 20px;
+  }
+  .fi-green { background: var(--green-50); }
+  .fi-teal  { background: var(--teal-50); }
+  .fi-amber { background: var(--amber-50); }
+  .feature-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--gray-900);
+  }
+  .feature-card p {
+    font-size: 0.88rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* HOW IT WORKS */
+  .how {
+    padding: 5rem 3rem;
+    background: var(--teal-50);
+  }
+  .how-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .how-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--teal-800);
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+  }
+  .step {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    min-width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--teal-400);
+    color: white;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-body h4 {
+    font-weight: 500;
+    color: var(--teal-800);
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+  }
+  .step-body p {
+    font-size: 0.88rem;
+    color: var(--teal-600);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: var(--gray-400);
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-100);
+  }
+
+  /* SUCCESS */
+  .success-msg {
+    display: none;
+    background: var(--teal-50);
+    border: 1px solid var(--teal-200);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    color: var(--teal-800);
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+    font-weight: 400;
+  }
+  .success-msg.show { display: block; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Bord<span>Aqua</span></div>
+  <div class="nav-badge">Próximamente</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-leaves">
+    <svg class="pot-illustration" viewBox="0 0 320 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Planta / hojas -->
+      <ellipse cx="160" cy="95" rx="18" ry="55" fill="#3B6D11" transform="rotate(-20 160 95)"/>
+      <ellipse cx="160" cy="95" rx="18" ry="55" fill="#639922" transform="rotate(20 160 95)"/>
+      <ellipse cx="160" cy="80" rx="14" ry="45" fill="#5DCAA5" transform="rotate(-5 160 80)"/>
+      <ellipse cx="145" cy="105" rx="22" ry="14" fill="#639922" transform="rotate(-35 145 105)"/>
+      <ellipse cx="175" cy="110" rx="22" ry="14" fill="#3B6D11" transform="rotate(35 175 110)"/>
+      <!-- Tierra -->
+      <ellipse cx="160" cy="158" rx="62" ry="14" fill="#27500A"/>
+      <!-- Cuerpo maceta -->
+      <path d="M100 162 Q95 220 108 260 Q120 290 160 292 Q200 290 212 260 Q225 220 220 162 Z" fill="#BA7517"/>
+      <path d="M106 165 Q102 220 114 255 Q125 282 160 284 Q195 282 206 255 Q218 220 214 165 Z" fill="#EF9F27"/>
+      <!-- Borde exterior doble (el anillo de agua) -->
+      <rect x="90" y="150" width="140" height="20" rx="10" fill="#5DCAA5"/>
+      <rect x="96" y="153" width="128" height="14" rx="7" fill="#1D9E75"/>
+      <!-- Agua en el canal -->
+      <rect x="100" y="155" width="120" height="10" rx="5" fill="#60d0ef" opacity="0.7"/>
+      <ellipse cx="160" cy="160" rx="60" ry="5" fill="#b3eafb" opacity="0.5"/>
+      <!-- Reflejo agua -->
+      <line x1="110" y1="159" x2="130" y2="159" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+      <!-- Hormiga bloqueada -->
+      <g transform="translate(80, 155)">
+        <circle cx="0" cy="0" r="4" fill="#2C2C2A"/>
+        <circle cx="-6" cy="4" r="3" fill="#2C2C2A"/>
+        <circle cx="6" cy="4" r="3" fill="#2C2C2A"/>
+        <line x1="-4" y1="-2" x2="-8" y2="-6" stroke="#2C2C2A" stroke-width="1"/>
+        <line x1="4" y1="-2" x2="8" y2="-6" stroke="#2C2C2A" stroke-width="1"/>
+        <line x1="-7" y1="2" x2="-12" y2="0" stroke="#2C2C2A" stroke-width="1"/>
+        <line x1="7" y1="2" x2="12" y2="0" stroke="#2C2C2A" stroke-width="1"/>
+        <!-- X de bloqueada -->
+        <line x1="14" y1="-8" x2="22" y2="0" stroke="#E24B4A" stroke-width="2" stroke-linecap="round"/>
+        <line x1="22" y1="-8" x2="14" y2="0" stroke="#E24B4A" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <!-- Etiqueta agua -->
+      <rect x="175" y="142" width="60" height="22" rx="6" fill="white" opacity="0.9"/>
+      <text x="205" y="157" font-family="DM Sans, sans-serif" font-size="10" fill="#0F6E56" text-anchor="middle" font-weight="500">barrera de agua</text>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Nuevo producto</div>
+    <h1>Tu planta,<br><em>libre de hormigas.</em><br>Por siempre.</h1>
+    <p class="hero-desc">
+      BordAqua es la primera maceta con canal de agua integrado en su borde. Sin químicos, sin sprays, sin preocupaciones. Solo agua — la barrera más simple y natural que existe.
+    </p>
+
+    <div class="form-wrapper">
+      <label class="form-label">Avisame cuando esté disponible</label>
+      <div class="form-row">
+        <input class="form-input" type="email" id="emailInput" placeholder="tu@email.com" />
+        <button class="btn-submit" onclick="handleSubmit()">Anotarme</button>
+      </div>
+      <p class="form-note">Sin spam. Te avisamos una sola vez cuando lancemos.</p>
+      <div class="success-msg" id="successMsg">
+        ¡Listo! Te avisamos en cuanto BordAqua esté disponible. 🌿
+      </div>
+      <div class="counter-row">
+        <div class="avatars">
+          <div class="avatar av1">MG</div>
+          <div class="avatar av2">LR</div>
+          <div class="avatar av3">JP</div>
+        </div>
+        <span class="counter-text"><strong id="counter">47</strong> personas ya están anotadas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <h2 class="features-title">¿Por qué BordAqua?</h2>
+  <p class="features-sub">Diseñada para quienes cuidan sus plantas con atención.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon fi-green">🌿</div>
+      <h3>Sin químicos</h3>
+      <p>Solo agua. Nada de venenos ni productos que dañen la planta, la tierra o el ambiente.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon fi-teal">💧</div>
+      <h3>Barrera permanente</h3>
+      <p>El canal de agua crea un foso natural que las hormigas no pueden cruzar.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon fi-amber">✦</div>
+      <h3>Diseño integrado</h3>
+      <p>No es un accesorio extra. El canal forma parte del diseño de la maceta desde su origen.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="how-inner">
+    <h2 class="how-title">Cómo funciona</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Colocá tu planta en BordAqua</h4>
+          <p>Como cualquier maceta. La diferencia está en el borde doble que rodea la boca.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Llenás el canal con agua</h4>
+          <p>Vertís un poco de agua en el surco exterior. Es simple, rápido y dura varios días.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Las hormigas no pasan</h4>
+          <p>El agua actúa como barrera natural. Tu planta queda completamente protegida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 BordAqua · Producto en desarrollo · <a href="#" style="color: var(--teal-400); text-decoration: none;">Contacto</a>
+</footer>
+
+<script>
+  let count = 47;
+  function handleSubmit() {
+    const input = document.getElementById('emailInput');
+    const msg = document.getElementById('successMsg');
+    const counter = document.getElementById('counter');
+    if (!input.value || !input.value.includes('@')) {
+      input.style.borderColor = '#E24B4A';
+      setTimeout(() => input.style.borderColor = '', 1500);
+      return;
+    }
+    count++;
+    counter.textContent = count;
+    msg.classList.add('show');
+    input.value = '';
+    input.disabled = true;
+    document.querySelector('.btn-submit').disabled = true;
+    document.querySelector('.btn-submit').style.opacity = '0.5';
+  }
+  document.getElementById('emailInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleSubmit();
+  });
+</script>
+</body>
+</html>
